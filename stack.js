@@ -1,3 +1,6 @@
+// ----------------------------------------Stack using Linked-List----------------------------------------
+
+
 class node {
 	constructor(value) {
 		this.value = value
@@ -58,3 +61,48 @@ myStack.pop()
 // myStack.pop()
 console.log(myStack.peek())
 console.log('Length of the stack is: '+ myStack.length)
+
+
+
+// ----------------------------------------Stack using array----------------------------------------
+
+
+class node {
+	constructor(value) {
+		this.value = value
+		this.next = null
+	}
+}
+
+class stack {
+	constructor() {
+		this.array = []
+	}
+	peek() {
+		return this.array[this.array.length-1]
+	}
+	push(value) {
+		this.array.push(value)
+	}
+	pop() {
+		this.array.pop()
+	}
+	isEmpty() {
+		if(this.array.length === 0)
+		return 'Yes, The stack is empty'
+	}
+}
+const myStack = new stack()
+console.log(myStack.isEmpty())
+myStack.peek()
+myStack.pop()
+myStack.push(2)
+myStack.push(14)
+myStack.push(3)
+myStack.push(5)
+myStack.pop()
+myStack.pop()
+myStack.pop()
+myStack.pop()
+console.log(myStack.peek())
+console.log('Length of the stack is: '+ myStack.array.length)
