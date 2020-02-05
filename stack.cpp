@@ -13,6 +13,7 @@ bool isFull(struct Stack *s){
 	return (s->top == s->size-1) ? 1 : 0;
 }
 void push(struct Stack *s, int value){
+	cout<<endl;
 	if(isFull(s)){
 		cout<<"Stack is Full\n";
 		return;
@@ -22,14 +23,20 @@ void push(struct Stack *s, int value){
 		s->numOfElement++;
 	}
 }
-int peek(struct Stack *s){
+int peek(struct Stack *s, int pos = 1){
+	cout<<endl;
 	if(isEmpty(s)){
 		cout<<"Stack is Empty\n";
 		return INT_MAX;
+	} else if(pos>0 && pos<=s->numOfElement){
+		return s->stackList[s->top-pos+1];
+	} else {
+		cout<<"Invalid position\n";
+		return INT_MIN;
 	}
-	return s->stackList[s->top];
 }
 int pop(struct Stack *s){
+	cout<<endl;
 	if(isEmpty(s)){
 		cout<<"Stack is Empty\n";
 		return INT_MIN;
@@ -50,7 +57,7 @@ void display(struct Stack s){
 	}cout<<"----\n";
 }
 int main(){
-    int choice, flag = 1;
+    int choice, flag = 1, pos;
 	struct Stack newStack;
 	cout<<"Enter maximum size of stack: ";
 	cin>>newStack.size;
@@ -59,7 +66,7 @@ int main(){
 	newStack.stackList = new int[newStack.size];
 	cout<<"1. For pushing element in stack press '1'\n";
 	cout<<"2. For poping out element in stack press '2'\n";
-	cout<<"3. For peeking the stack press '3'\n";
+	cout<<"3. For peeking an element in the stack press '3'\n";
 	cout<<"4. For displaying stack element press '4'\n";
 	cout<<"5. For displaying number of element present in the stack press '5'\n";
 	while(flag != 0){
@@ -67,26 +74,28 @@ int main(){
     	cin>>choice;
     	switch(choice){
     	    case 1:
-    	    cout<<"\nEnter value to push: ";
-    	    int value;
-    	    cin>>value;
-    	    push(&newStack, value);
-    	    break;
+	    	    cout<<"\nEnter value to push: ";
+	    	    int value;
+	    	    cin>>value;
+	    	    push(&newStack, value);
+	    	    break;
     	    case 2:
-    	    cout<<"\nPopped item: "<<pop(&newStack);
-    	    break;
+	    	    cout<<"\nPopped item: "<<pop(&newStack);
+	    	    break;
     	    case 3:
-    	    cout<<"\nTopmost element: "<<peek(&newStack);
-    	    break;
+	    	    cout<<"\nEnter the position of item you want to peek: ";
+	    	    cin>>pos;
+	    	    cout<<"\nThe "<<pos<<"th element is: "<<peek(&newStack, pos);
+	    	    break;
     	    case 4:
-    	    display(newStack);
-    	    break;
+	    	    display(newStack);
+	    	    break;
     	    case 5:
-    	    cout<<"\nNumber of element present in the stack is: "<<newStack.numOfElement;
-    	    break;
+	    	    cout<<"\nNumber of element present in the stack is: "<<newStack.numOfElement;
+	    	    break;
     	    default:
-    	    cout<<"\nEnter valid choice\n";
-    	    break;
+	    	    cout<<"\nEnter valid choice\n";
+	    	    break;
 	    }
 	    cout<<"\nWant to continue press '1' else press '0': ";
 	    cin>>flag;
